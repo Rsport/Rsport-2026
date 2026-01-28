@@ -1,0 +1,98 @@
+.scrollContainer {
+    display: flex;
+    gap: 1rem;
+    overflow-x: auto;
+    padding-bottom: 1rem;
+    /* Hide scrollbar */
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.scrollContainer::-webkit-scrollbar {
+    display: none;
+}
+
+.cardWrapper {
+    min-width: 280px;
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    display: flex;
+    flex-direction: column;
+}
+
+.imageContainer {
+    height: 160px;
+    /* Fallback Image Color */
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    padding: 1rem;
+}
+
+.badge {
+    background: #3b82f6;
+    color: white;
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 0.25rem 0.6rem;
+    border-radius: 4px;
+    text-transform: uppercase;
+    z-index: 10;
+    position: relative;
+}
+
+.cardContent {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.classTitle {
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: #0f172a;
+}
+
+.timeInfo {
+    font-size: 0.9rem;
+    color: #64748b;
+    margin-bottom: 0.5rem;
+}
+
+.subscribeBtn {
+    width: 100%;
+    background: #f1f5f9;
+    color: #0f172a;
+    border: none;
+    padding: 0.75rem;
+    border-radius: 8px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.subscribeBtn:hover {
+    background: #e2e8f0;
+}
+
+@media (prefers-color-scheme: dark) {
+    .cardWrapper {
+        background: #1e293b;
+    }
+
+    .classTitle {
+        color: white;
+    }
+
+    .subscribeBtn {
+        background: #334155;
+        color: white;
+    }
+
+    .subscribeBtn:hover {
+        background: #475569;
+    }
+}

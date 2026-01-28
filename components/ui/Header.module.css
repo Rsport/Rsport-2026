@@ -1,0 +1,48 @@
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+    background: white;
+    position: sticky;
+    top: 0;
+    z-index: 50;
+}
+
+.menuBtn,
+.profile {
+    background: none;
+    border: none;
+    color: var(--foreground);
+    cursor: pointer;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.logoIcon {
+    background: #3b82f6;
+    color: white;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    font-size: 0.8rem;
+}
+
+.logoText {
+    font-weight: 800;
+    font-size: 1.2rem;
+    color: var(--foreground);
+}
+
+@media (prefers-color-scheme: dark) {
+    .header {
+        background: #0f172a;
+    }
+}

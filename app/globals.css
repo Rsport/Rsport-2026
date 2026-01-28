@@ -1,0 +1,64 @@
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+
+  /* Brand Colors */
+  --primary: #1a2b4b;
+  /* Dark Blue from logo */
+  --secondary: #64748b;
+  /* Grey/Silver tone */
+  --accent: #3b82f6;
+  /* A brighter blue for accents/buttons */
+  --light-grey: #f1f5f9;
+
+  --font-sans: 'Inter', system-ui, sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0f172a;
+    --foreground: #ededed;
+    --primary: #3b82f6;
+    --secondary: #94a3b8;
+    --light-grey: #1e293b;
+  }
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  color: var(--foreground);
+  background-color: var(--background);
+  /* Textured Background */
+  background-image: linear-gradient(to bottom,
+      rgba(255, 255, 255, 0.85),
+      rgba(255, 255, 255, 0.85)), url('/assets/bg-texture.png');
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+  font-family: var(--font-sans);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background-image: linear-gradient(to bottom,
+        rgba(15, 23, 42, 0.88),
+        rgba(15, 23, 42, 0.88)), url('/assets/bg-texture.png');
+  }
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  cursor: pointer;
+}

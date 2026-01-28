@@ -1,0 +1,51 @@
+import Image from "next/image";
+import { SCHEDULE_DATA } from "@/lib/data";
+import { ScheduleList } from "@/components/business/ScheduleList";
+import styles from "./page.module.css";
+import { Button } from "@/components/ui/Button/Button";
+import Link from "next/link";
+
+export default function Home() {
+  return (
+    <main className={styles.main}>
+      {/* Hero Section */}
+      <section className={styles.hero}>
+        <div className={styles.heroOverlay}></div>
+        <div className={styles.heroContent}>
+          <h1 className={styles.heroTitle}>Movete bien</h1>
+          <p className={styles.heroSubtitle}>
+            Tu mejor versión empieza hoy. Entrena, supérate y vive mejor con Rsport.
+          </p>
+          <Link href="#schedule">
+            <button className={styles.ctaButton}>Reservar Turno</button>
+          </Link>
+        </div>
+      </section>
+
+      {/* Classes Section */}
+      <section id="schedule" className={styles.classesSection}>
+        <div className={styles.sectionHeader}>
+          <h2>Clases Populares</h2>
+          <Link href="/info" className={styles.seeAll}>Ver Todo →</Link>
+        </div>
+
+        {/* Horizontal Scroll Wrapper */}
+        <div className={styles.cardsWrapper}>
+          <ScheduleList slots={SCHEDULE_DATA} />
+        </div>
+      </section>
+
+      {/* Info Section */}
+      <section className={styles.infoSection}>
+        <div className={styles.infoCard}>
+          <div className={styles.infoIcon}>🛡️</div>
+          <h3>¿Por qué elegirnos?</h3>
+          <p>Somos más que un gimnasio. Somos una comunidad dedicada a potenciar tu rendimiento con entrenadores expertos.</p>
+          <Link href="/info">
+            <Button variant="outline" className={styles.infoBtn}>Saber Más →</Button>
+          </Link>
+        </div>
+      </section>
+    </main>
+  );
+}

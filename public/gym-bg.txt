@@ -1,0 +1,1 @@
+/* CSS for Hero Background, used directly in page.module.css or global if needed */

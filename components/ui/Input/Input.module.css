@@ -1,0 +1,46 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+.label {
+    font-weight: 500;
+    font-size: 0.9rem;
+    color: var(--foreground);
+}
+
+.input {
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    border: 1px solid #cbd5e1;
+    font-size: 1rem;
+    transition: border-color 0.2s;
+    width: 100%;
+    outline: none;
+    font-family: inherit;
+}
+
+.input:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 2px rgba(26, 43, 75, 0.1);
+}
+
+.errorInput {
+    border-color: #ef4444;
+}
+
+.errorMessage {
+    font-size: 0.8rem;
+    color: #ef4444;
+}
+
+@media (prefers-color-scheme: dark) {
+    .input {
+        background: #1e293b;
+        border-color: #475569;
+        color: white;
+    }
+}

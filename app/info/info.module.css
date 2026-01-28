@@ -1,0 +1,309 @@
+.container {
+    min-height: 100vh;
+    padding: 1rem 1rem 6rem 1rem;
+    background: transparent;
+}
+
+.section {
+    margin-bottom: 3rem;
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.sectionTitle {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--primary);
+    margin-bottom: 1.5rem;
+    border-left: 5px solid var(--primary);
+    padding-left: 1rem;
+}
+
+/* Philosophy */
+.philosophyHeader {
+    text-align: center;
+    padding: 2rem 1rem;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.mainTitle {
+    font-size: 2.5rem;
+    color: #0f172a;
+    margin-bottom: 1rem;
+}
+
+.philosophyText {
+    color: #64748b;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    max-width: 700px;
+    margin: 0 auto 1.5rem auto;
+}
+
+.location {
+    display: inline-block;
+    background: #f1f5f9;
+    padding: 0.5rem 1.5rem;
+    border-radius: 99px;
+    font-weight: 600;
+    color: #0f172a;
+}
+
+/* Activities */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.activityCard {
+    border-top: none;
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+    min-height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    background-size: cover;
+    background-position: center;
+    border-radius: 16px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.cardOverlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    /* Much darker gradient for better readability */
+    background: linear-gradient(to top,
+            rgba(0, 0, 0, 0.95) 0%,
+            rgba(0, 0, 0, 0.8) 50%,
+            rgba(0, 0, 0, 0.5) 100%);
+    z-index: 1;
+}
+
+.cardContent {
+    position: relative;
+    z-index: 2;
+    padding: 2rem;
+}
+
+.activityTitle {
+    font-size: 1.8rem;
+    color: white;
+    margin-bottom: 0.75rem;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.9);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+}
+
+.activityCard p {
+    color: #ffffff;
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 0.8rem;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9);
+    font-weight: 500;
+}
+
+/* Background Images */
+.bgFuncional {
+    background-image: url('/assets/funcional_real.jpg');
+}
+
+.bgSemi {
+    background-image: url('/assets/semipersonalizado_real.png');
+}
+
+.bgTaekwondo {
+    background-image: url('/assets/taekwondo.jpg');
+}
+
+.bgYoga {
+    background-image: url('/assets/yoga.jpg');
+}
+
+.bgRitmos {
+    background-image: url('/assets/ritmos_real.png');
+}
+
+/* Schedule */
+.tableWrapper {
+    overflow-x: auto;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    background: white;
+}
+
+.scheduleTable {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 600px;
+}
+
+.scheduleTable th {
+    background: #1e293b;
+    color: white;
+    padding: 1rem;
+    text-align: center;
+    font-weight: 600;
+    border: 1px solid #334155;
+}
+
+.scheduleTable td {
+    padding: 1rem;
+    text-align: center;
+    border: 1px solid #e2e8f0;
+    color: #475569;
+    font-size: 0.9rem;
+    vertical-align: middle;
+}
+
+.timeCell {
+    background: #f8fafc;
+    font-weight: 700;
+    color: #0f172a;
+}
+
+/* Prices */
+.pricesGrid {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.priceCard {
+    overflow: hidden;
+    padding: 0;
+}
+
+.priceTitle {
+    background: #1e293b;
+    color: white;
+    padding: 1rem;
+    text-align: center;
+    margin: 0;
+    font-size: 1.1rem;
+}
+
+.priceTable {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.priceTable th {
+    background: #f1f5f9;
+    padding: 0.75rem;
+    font-size: 0.85rem;
+    color: #475569;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.priceTable td {
+    padding: 0.75rem;
+    border-bottom: 1px solid #e2e8f0;
+    text-align: center;
+    font-size: 0.9rem;
+    color: #1e293b;
+    font-weight: 500;
+}
+
+.priceTable tr:last-child td {
+    border-bottom: none;
+}
+
+/* Promo */
+.promoCard {
+    text-align: center;
+    background: #1e293b;
+    color: white;
+    padding: 3rem;
+}
+
+.freeBadge {
+    font-size: 3rem;
+    font-weight: 900;
+    color: #3b82f6;
+    /* Electric Blue */
+    text-transform: uppercase;
+    margin-top: 1rem;
+    text-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.05);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    .philosophyHeader {
+        background: #1e293b;
+    }
+
+    .mainTitle {
+        color: white;
+    }
+
+    .philosophyText {
+        color: #cbd5e1;
+    }
+
+    .location {
+        background: #334155;
+        color: white;
+    }
+
+    .activityTitle {
+        color: white;
+    }
+
+    .activityCard p {
+        color: #94a3b8;
+    }
+
+    .scheduleTable th {
+        background: #0f172a;
+        border-color: #1e293b;
+    }
+
+    .scheduleTable td {
+        border-color: #334155;
+        color: #cbd5e1;
+    }
+
+    .timeCell {
+        background: #1e293b;
+        color: white;
+    }
+
+    .priceTitle {
+        background: #0f172a;
+    }
+
+    .priceTable th {
+        background: #334155;
+        color: #cbd5e1;
+    }
+
+    .priceTable td {
+        border-color: #334155;
+        color: white;
+    }
+}

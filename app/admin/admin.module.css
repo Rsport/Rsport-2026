@@ -1,0 +1,85 @@
+.container {
+    padding: 2rem;
+    min-height: 100vh;
+    background: var(--light-grey);
+}
+
+.title {
+    color: var(--primary);
+    margin-bottom: 2rem;
+}
+
+.tableCard {
+    padding: 0;
+    overflow: hidden;
+}
+
+.tableWrapper {
+    overflow-x: auto;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.table th {
+    background: #f1f5f9;
+    padding: 1rem;
+    font-weight: 600;
+    color: var(--secondary);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.table td {
+    padding: 1rem;
+    border-bottom: 1px solid #e2e8f0;
+    color: var(--foreground);
+}
+
+.table tr:last-child td {
+    border-bottom: none;
+}
+
+.userCell {
+    display: flex;
+    flex-direction: column;
+}
+
+.userName {
+    font-weight: 600;
+}
+
+.userEmail {
+    font-size: 0.8rem;
+    color: var(--secondary);
+}
+
+.empty {
+    text-align: center;
+    padding: 3rem;
+    color: var(--secondary);
+}
+
+.daysTagWrapper {
+    display: flex;
+    gap: 0.25rem;
+    flex-wrap: wrap;
+}
+
+.dayTag {
+    background: var(--primary);
+    color: white;
+    padding: 0.1rem 0.4rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+}
+
+.refresh {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: flex-end;
+}
