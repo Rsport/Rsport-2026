@@ -11,6 +11,7 @@ interface UserData {
     surname: string;
     dni: string;
     email: string;
+    image?: string;
 }
 
 export default function ProfilePage() {
@@ -25,6 +26,21 @@ export default function ProfilePage() {
             // If not logged in, send to home? or keep empty
         }
     }, []);
+
+    const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0];
+        if (!file || !user) return;
+
+        const reader = new FileReader();
+        reader.onloadend = () => {
+            const base64String = reader.result as string;
+            const updatedUser = { ...user, image: base64String };
+            setUser(updatedUser);
+            localStorage.setItem('rsport_user', JSON.stringify(updatedUser));
+            window.dispatchEvent(new Event('storage'));
+        };
+        reader.readAsDataURL(file);
+    };
 
     const handleLogout = () => {
         if (confirm('¿Estás seguro de que quieres cerrar sesión?')) {
@@ -52,8 +68,26 @@ export default function ProfilePage() {
             <h1 className={styles.title}>Mi Perfil</h1>
 
             <Card className={styles.profileCard}>
-                <div className={styles.avatar}>
-                    <span>{user.name[0]}{user.surname[0]}</span>
+                <div className={styles.avatarWrapper}>
+                    <label htmlFor="imageUpload" className={styles.avatarLabel}>
+                        <div className={styles.avatar}>
+                            {user.image ? (
+                                <img src={user.image} alt="Profile" className={styles.avatarImg} />
+                            ) : (
+                                <span>{user.name[0]}{user.surname[0]}</span>
+                            )}
+                            <div className={styles.avatarOverlay}>
+                                👤
+                            </div>
+                        </div>
+                    </label>
+                    <input
+                        type="file"
+                        id="imageUpload"
+                        accept="image/*"
+                        onChange={handleImageChange}
+                        className={styles.hiddenInput}
+                    />
                 </div>
 
                 <div className={styles.infoGrid}>
