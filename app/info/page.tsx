@@ -16,7 +16,7 @@ export default function InfoPage() {
                         Queremos que encuentres en esa decisión de entrenar, un sentido para mantenerte sano y feliz.
                     </p>
                     <div className={styles.location}>
-                        📍 Gimnasio 15 n1720 e/ 58 y 59
+                        📍 Gimnasio 15 n1270 e/ 58 y 59
                     </div>
                 </div>
             </section>
