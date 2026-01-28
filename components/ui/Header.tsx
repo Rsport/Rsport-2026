@@ -2,12 +2,29 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Drawer } from './Drawer';
 import styles from './Header.module.css';
 
 export const Header = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [userImage, setUserImage] = useState<string | null>(null);
+
+    useEffect(() => {
+        const updateImage = () => {
+            const storedUser = localStorage.getItem('rsport_user');
+            if (storedUser) {
+                const user = JSON.parse(storedUser);
+                setUserImage(user.image || null);
+            } else {
+                setUserImage(null);
+            }
+        };
+
+        updateImage();
+        window.addEventListener('storage', updateImage);
+        return () => window.removeEventListener('storage', updateImage);
+    }, []);
 
     return (
         <>
@@ -28,7 +45,13 @@ export const Header = () => {
                     </Link>
                 </div>
                 <Link href="/profile" className={styles.profile}>
-                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                    {userImage ? (
+                        <div className={styles.profilePhotoWrapper}>
+                            <img src={userImage} alt="Profile" className={styles.profilePhoto} />
+                        </div>
+                    ) : (
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                    )}
                 </Link>
             </header>
 
