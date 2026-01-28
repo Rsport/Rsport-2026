@@ -21,7 +21,7 @@ export const ScheduleList = ({ slots }: ScheduleListProps) => {
                             fill
                             style={{ objectFit: 'cover' }}
                         />
-                        <span className={styles.badge}>{slot.title === 'Funcional' ? 'Trabajos aeróbico y de fuerza' : 'Personalizado'}</span>
+                        <span className={styles.badge}>{slot.title === 'Funcional' ? 'Trabajos aeróbicos y de fuerza' : 'Personalizado'}</span>
                     </div>
                     <div className={styles.cardContent}>
                         <h3 className={styles.classTitle}>{slot.title}</h3>
