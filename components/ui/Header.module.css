@@ -42,7 +42,11 @@
 }
 
 .logoImage {
-    transition: filter 0.3s ease;
+    transition: opacity 0.3s ease;
+}
+
+.logoDark {
+    display: none;
 }
 
 .logoWrapper {
@@ -72,9 +76,11 @@
         background: #0f172a;
     }
 
-    .logoImage,
-    .logoWrapper img {
-        filter: brightness(0) invert(1) !important;
-        -webkit-filter: brightness(0) invert(1) !important;
+    .logoLight {
+        display: none;
+    }
+
+    .logoDark {
+        display: block;
     }
 }
