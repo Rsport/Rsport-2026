@@ -133,10 +133,10 @@ export default function ProfilePage() {
                 </div>
             </Card>
 
-            <h2 className={styles.subtitle}>Mi Historial de Clases</h2>
+            <h2 className={styles.subtitle}>Mi Agenda / Historial</h2>
             <Card className={styles.historyCard}>
                 {isLoadingHistory ? (
-                    <p className={styles.emptyMsg}>Cargando historial...</p>
+                    <p className={styles.emptyMsg}>Cargando tu agenda...</p>
                 ) : history.length > 0 ? (
                     <div className={styles.historyList}>
                         {history.map((item) => (
