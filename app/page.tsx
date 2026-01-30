@@ -6,6 +6,12 @@ import { Button } from "@/components/ui/Button/Button";
 import Link from "next/link";
 
 export default function Home() {
+  const now = new Date();
+  const dayNames = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
+  const todayName = dayNames[now.getDay()];
+
+  const todaysClasses = SCHEDULE_DATA.filter(slot => slot.days.includes(todayName));
+
   return (
     <main className={styles.main}>
       {/* Hero Section */}
@@ -25,13 +31,17 @@ export default function Home() {
       {/* Classes Section */}
       <section id="schedule" className={styles.classesSection}>
         <div className={styles.sectionHeader}>
-          <h2>Clases Populares</h2>
-          <Link href="/info" className={styles.seeAll}>Ver Todo →</Link>
+          <h2>Clases de hoy ({todayName})</h2>
+          <Link href="/info" className={styles.seeAll}>Ver Cronograma →</Link>
         </div>
 
         {/* Horizontal Scroll Wrapper */}
         <div className={styles.cardsWrapper}>
-          <ScheduleList slots={SCHEDULE_DATA} />
+          {todaysClasses.length > 0 ? (
+            <ScheduleList slots={todaysClasses} />
+          ) : (
+            <p className={styles.emptyMsg}>No hay clases programadas para hoy.</p>
+          )}
         </div>
       </section>
 
