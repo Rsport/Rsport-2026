@@ -17,7 +17,7 @@ export const SCHEDULE_DATA: TimeSlot[] = [
         time: '18:00',
         days: ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes'],
         capacity: 15,
-        image: '/assets/funcional.png',
+        image: '/assets/class-func-18.jpg',
         price: '$29.000'
     },
     {
@@ -26,7 +26,7 @@ export const SCHEDULE_DATA: TimeSlot[] = [
         time: '19:00',
         days: ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes'],
         capacity: 15,
-        image: '/assets/funcional.png',
+        image: '/assets/class-func-19.png',
         price: '$29.000'
     },
     {
@@ -35,7 +35,7 @@ export const SCHEDULE_DATA: TimeSlot[] = [
         time: '20:00',
         days: ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes'],
         capacity: 8,
-        image: '/assets/semipersonalizado.png',
+        image: '/assets/class-semi-20.jpg',
         price: '$40.000'
     }
 ];
