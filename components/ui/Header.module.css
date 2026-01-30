@@ -45,6 +45,11 @@
     transition: filter 0.3s ease;
 }
 
+.logoWrapper {
+    display: flex;
+    align-items: center;
+}
+
 .profilePhotoWrapper {
     width: 32px;
     height: 32px;
@@ -67,7 +72,9 @@
         background: #0f172a;
     }
 
-    .logoImage {
+    .logoImage,
+    .logoWrapper img {
         filter: brightness(0) invert(1) !important;
+        -webkit-filter: brightness(0) invert(1) !important;
     }
 }
