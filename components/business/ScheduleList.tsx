@@ -19,7 +19,7 @@ export const ScheduleList = ({ slots }: ScheduleListProps) => {
                             src={slot.image}
                             alt={slot.title}
                             fill
-                            style={{ objectFit: 'cover' }}
+                            style={{ objectFit: 'cover', objectPosition: slot.id === 'func-18' ? 'top' : 'center' }}
                         />
                         <span className={styles.badge}>{slot.title === 'Funcional' ? 'Trabajos aeróbicos y de fuerza' : 'Personalizado'}</span>
                     </div>
