@@ -45,26 +45,58 @@ function BookingContent() {
         );
     }
 
-    const [selectedDays, setSelectedDays] = useState<string[]>([]);
+    const [selectedDate, setSelectedDate] = useState<string>('');
 
-    const toggleDay = (day: string) => {
-        if (selectedDays.includes(day)) {
-            setSelectedDays(selectedDays.filter(d => d !== day));
-        } else {
-            setSelectedDays([...selectedDays, day]);
+    // Generate options for "Presente"
+    const getPresenteOptions = () => {
+        const options = [];
+        const now = new Date();
+
+        // Helper to format date for display
+        const formatDate = (date: Date) => {
+            const dayNames = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
+            const dayName = dayNames[date.getDay()];
+            const dayNum = date.getDate();
+            const monthNames = ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic'];
+            const month = monthNames[date.getMonth()];
+            return `${dayName} ${dayNum} de ${month}`;
+        };
+
+        // Helper to format date for value (YYYY-MM-DD)
+        const formatValue = (date: Date) => date.toISOString().split('T')[0];
+
+        // Today
+        if (slot.days.includes(['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'][now.getDay()])) {
+            options.push({
+                label: `Hoy (${formatDate(now)})`,
+                value: formatValue(now)
+            });
         }
+
+        // Tomorrow
+        const tomorrow = new Date(now);
+        tomorrow.setDate(now.getDate() + 1);
+        if (slot.days.includes(['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'][tomorrow.getDay()])) {
+            options.push({
+                label: `Mañana (${formatDate(tomorrow)})`,
+                value: formatValue(tomorrow)
+            });
+        }
+
+        return options;
     };
 
+    const dateOptions = getPresenteOptions();
+
     const handleConfirm = async () => {
-        if (selectedDays.length === 0) {
-            alert('Por favor selecciona al menos un día.');
+        if (!selectedDate) {
+            alert('Por favor selecciona el día para dar el presente.');
             return;
         }
 
         const storedUser = localStorage.getItem('rsport_user');
         if (!storedUser) {
             alert('Por favor regístrate antes de reservar.');
-            // Send to register with return path
             router.push(`/register?redirect=/booking?slotId=${slotId}`);
             return;
         }
@@ -86,7 +118,8 @@ function BookingContent() {
                     className: slot.title,
                     price: slot.price || '$0',
                     time: slot.time,
-                    days: selectedDays
+                    days: ['Puntual'], // Marking as a specific day instead of a weekly set
+                    date: selectedDate
                 }),
             });
 
@@ -95,12 +128,11 @@ function BookingContent() {
                 throw new Error(errorData.error || 'Error en el servidor');
             }
 
-            // Success
-            alert(`¡Reserva confirmada para ${slot.title} a las ${slot.time}!\nDías: ${selectedDays.join(', ')}`);
+            alert(`¡Asistencia confirmada para ${slot.title} el día ${selectedDate}!`);
             router.push('/');
         } catch (e: any) {
             console.error(e);
-            alert(`Error al reservar: ${e.message}`);
+            alert(`Error al dar el presente: ${e.message}`);
             setIsConfirming(false);
         }
     };
@@ -108,7 +140,7 @@ function BookingContent() {
     return (
         <div className={styles.container}>
             <Card className={styles.card}>
-                <h1 className={styles.title}>Confirmar Reserva</h1>
+                <h1 className={styles.title}>Dar el Presente</h1>
 
                 <div className={styles.details}>
                     <div className={styles.detailItem}>
@@ -119,6 +151,7 @@ function BookingContent() {
                         <span className={styles.label}>Horario:</span>
                         <span className={styles.value}>{slot.time} hs</span>
                     </div>
+
                     <button
                         className={styles.attendeesBtn}
                         onClick={(e) => {
@@ -127,7 +160,7 @@ function BookingContent() {
                             if (!showAttendees) fetchAttendees();
                         }}
                     >
-                        👥 Ver quiénes asisten
+                        👥 Ver quiénes vienen hoy
                     </button>
                     {showAttendees && (
                         <div className={styles.attendeesList}>
@@ -138,36 +171,40 @@ function BookingContent() {
                                     <span key={i} className={styles.attendeeName}>{name}</span>
                                 ))
                             ) : (
-                                <p className={styles.attendeeMsg}>Nadie anotado aún.</p>
+                                <p className={styles.attendeeMsg}>Nadie anotado aún para este turno.</p>
                             )}
                         </div>
                     )}
                 </div>
 
                 <div className={styles.daySelector}>
-                    <p className={styles.label}>Seleccioná tus días:</p>
+                    <p className={styles.label}>Seleccioná el día:</p>
                     <div className={styles.checkboxGrid}>
-                        {slot.days.map(day => (
-                            <label key={day} className={`${styles.checkboxLabel} ${selectedDays.includes(day) ? styles.activeDay : ''}`}>
+                        {dateOptions.map(opt => (
+                            <label key={opt.value} className={`${styles.checkboxLabel} ${selectedDate === opt.value ? styles.activeDay : ''}`}>
                                 <input
-                                    type="checkbox"
-                                    checked={selectedDays.includes(day)}
-                                    onChange={() => toggleDay(day)}
+                                    type="radio"
+                                    name="attendanceDate"
+                                    checked={selectedDate === opt.value}
+                                    onChange={() => setSelectedDate(opt.value)}
                                     className={styles.hiddenCheckbox}
                                 />
-                                {day}
+                                {opt.label}
                             </label>
                         ))}
                     </div>
+                    {dateOptions.length === 0 && (
+                        <p className={styles.errorMsg}>Esta clase no está disponible para hoy ni mañana.</p>
+                    )}
                 </div>
 
                 <div className={styles.actions}>
                     <Button
                         onClick={handleConfirm}
                         fullWidth
-                        disabled={isConfirming}
+                        disabled={isConfirming || dateOptions.length === 0}
                     >
-                        {isConfirming ? 'Confirmando...' : 'Confirmar Reserva'}
+                        {isConfirming ? 'Confirmando...' : 'Dar el Presente'}
                     </Button>
                     <Button
                         onClick={() => router.back()}
@@ -175,7 +212,7 @@ function BookingContent() {
                         fullWidth
                         disabled={isConfirming}
                     >
-                        Cancelar
+                        Volver
                     </Button>
                 </div>
             </Card>
