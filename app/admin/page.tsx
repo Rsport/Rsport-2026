@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import { Card } from '@/components/ui/Card/Card';
 import styles from './admin.module.css';
 import { Button } from '@/components/ui/Button/Button';
@@ -15,13 +16,30 @@ import { Button } from '@/components/ui/Button/Button';
 
 export default function AdminPage() {
     const [bookings, setBookings] = useState<any[]>([]);
+    const [isAuthorized, setIsAuthorized] = useState(false);
+    const router = useRouter();
+
+    const authorizedEmails = ['renngiann@gmail.com', 'rsport19movetebien@gmail.com'];
 
     useEffect(() => {
-        // Fetch bookings from API
-        fetch('/api/bookings')
-            .then(res => res.json())
-            .then(data => setBookings(data));
+        const storedUser = localStorage.getItem('rsport_user');
+        if (storedUser) {
+            const user = JSON.parse(storedUser);
+            if (authorizedEmails.includes(user.email)) {
+                setIsAuthorized(true);
+                // Fetch bookings from API
+                fetch('/api/bookings')
+                    .then(res => res.json())
+                    .then(data => setBookings(data));
+            } else {
+                router.push('/');
+            }
+        } else {
+            router.push('/');
+        }
     }, []);
+
+    if (!isAuthorized) return null;
 
     return (
         <main className={styles.container}>
