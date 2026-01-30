@@ -16,16 +16,33 @@ interface UserData {
 
 export default function ProfilePage() {
     const [user, setUser] = useState<UserData | null>(null);
+    const [history, setHistory] = useState<any[]>([]);
+    const [isLoadingHistory, setIsLoadingHistory] = useState(false);
     const router = useRouter();
 
     useEffect(() => {
         const storedUser = localStorage.getItem('rsport_user');
         if (storedUser) {
-            setUser(JSON.parse(storedUser));
-        } else {
-            // If not logged in, send to home? or keep empty
+            const userData = JSON.parse(storedUser);
+            setUser(userData);
+            fetchHistory(userData.dni);
         }
     }, []);
+
+    const fetchHistory = async (dni: string) => {
+        setIsLoadingHistory(true);
+        try {
+            const res = await fetch(`/api/user/history?dni=${dni}`);
+            if (res.ok) {
+                const data = await res.json();
+                setHistory(data);
+            }
+        } catch (error) {
+            console.error('Error fetching history:', error);
+        } finally {
+            setIsLoadingHistory(false);
+        }
+    };
 
     const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
@@ -114,6 +131,32 @@ export default function ProfilePage() {
                         Cerrar Sesión
                     </Button>
                 </div>
+            </Card>
+
+            <h2 className={styles.subtitle}>Mi Historial de Clases</h2>
+            <Card className={styles.historyCard}>
+                {isLoadingHistory ? (
+                    <p className={styles.emptyMsg}>Cargando historial...</p>
+                ) : history.length > 0 ? (
+                    <div className={styles.historyList}>
+                        {history.map((item) => (
+                            <div key={item.id} className={styles.historyItem}>
+                                <div className={styles.historyMain}>
+                                    <span className={styles.historyClass}>{item.className}</span>
+                                    <span className={styles.historyDate}>
+                                        {new Date(item.createdAt).toLocaleDateString('es-AR', { day: '2-digit', month: '2-digit', year: 'numeric' })}
+                                    </span>
+                                </div>
+                                <div className={styles.historyDetails}>
+                                    <span>{item.time}hs</span>
+                                    <span>{item.days}</span>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                ) : (
+                    <p className={styles.emptyMsg}>Todavía no tienes clases registradas.</p>
+                )}
             </Card>
         </main>
     );

@@ -126,4 +126,75 @@
     .infoItem p {
         border-color: #334155;
     }
+
+    .historyCard {
+        background: #1e293b;
+    }
+
+    .historyItem {
+        border-color: #334155;
+    }
+
+    .historyClass {
+        color: white;
+    }
+}
+
+.subtitle {
+    font-size: 1.5rem;
+    color: var(--primary);
+    margin: 3rem 0 1.5rem;
+    text-align: center;
+}
+
+.historyCard {
+    background: white;
+    padding: 1.5rem !important;
+    width: 100%;
+}
+
+.historyList {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.historyItem {
+    padding: 1rem;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.historyItem:last-child {
+    border-bottom: none;
+}
+
+.historyMain {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.3rem;
+}
+
+.historyClass {
+    font-weight: 700;
+    color: var(--foreground);
+}
+
+.historyDate {
+    font-size: 0.85rem;
+    color: #94a3b8;
+}
+
+.historyDetails {
+    display: flex;
+    gap: 1rem;
+    font-size: 0.9rem;
+    color: #64748b;
+}
+
+.emptyMsg {
+    text-align: center;
+    color: #94a3b8;
+    padding: 2rem;
+    font-style: italic;
 }
