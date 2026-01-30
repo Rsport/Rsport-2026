@@ -12,8 +12,27 @@ function BookingContent() {
     const router = useRouter();
     const slotId = searchParams.get('slotId');
     const [isConfirming, setIsConfirming] = useState(false);
+    const [attendees, setAttendees] = useState<string[]>([]);
+    const [showAttendees, setShowAttendees] = useState(false);
+    const [isLoadingAttendees, setIsLoadingAttendees] = useState(false);
 
     const slot = SCHEDULE_DATA.find(s => s.id === slotId);
+
+    const fetchAttendees = async () => {
+        if (!slot) return;
+        setIsLoadingAttendees(true);
+        try {
+            const res = await fetch(`/api/bookings/attendees?className=${slot.title}&time=${slot.time}`);
+            if (res.ok) {
+                const data = await res.json();
+                setAttendees(data);
+            }
+        } catch (error) {
+            console.error('Error fetching attendees:', error);
+        } finally {
+            setIsLoadingAttendees(false);
+        }
+    };
 
     if (!slot) {
         return (
@@ -100,6 +119,29 @@ function BookingContent() {
                         <span className={styles.label}>Horario:</span>
                         <span className={styles.value}>{slot.time} hs</span>
                     </div>
+                    <button
+                        className={styles.attendeesBtn}
+                        onClick={(e) => {
+                            e.preventDefault();
+                            setShowAttendees(!showAttendees);
+                            if (!showAttendees) fetchAttendees();
+                        }}
+                    >
+                        👥 Ver quiénes asisten
+                    </button>
+                    {showAttendees && (
+                        <div className={styles.attendeesList}>
+                            {isLoadingAttendees ? (
+                                <p className={styles.attendeeMsg}>Cargando...</p>
+                            ) : attendees.length > 0 ? (
+                                attendees.map((name, i) => (
+                                    <span key={i} className={styles.attendeeName}>{name}</span>
+                                ))
+                            ) : (
+                                <p className={styles.attendeeMsg}>Nadie anotado aún.</p>
+                            )}
+                        </div>
+                    )}
                 </div>
 
                 <div className={styles.daySelector}>

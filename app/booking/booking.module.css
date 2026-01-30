@@ -107,3 +107,43 @@
         border-color: #1e293b;
     }
 }
+
+.attendeesBtn {
+    background: none;
+    border: none;
+    color: var(--primary);
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 0.5rem 0;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.attendeesList {
+    background: white;
+    padding: 0.75rem;
+    border-radius: 6px;
+    border: 1px solid #e2e8f0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: -0.5rem;
+}
+
+.attendeeName {
+    background: #f1f5f9;
+    padding: 0.2rem 0.6rem;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    color: #475569;
+    font-weight: 500;
+}
+
+.attendeeMsg {
+    font-size: 0.85rem;
+    color: #94a3b8;
+    font-style: italic;
+}
