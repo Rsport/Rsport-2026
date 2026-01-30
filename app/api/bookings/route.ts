@@ -1,9 +1,13 @@
 import { NextResponse } from 'next/server';
 import { db } from '@/lib/db';
 
-export async function GET() {
+export async function GET(request: Request) {
+    const { searchParams } = new URL(request.url);
+    const date = searchParams.get('date');
+
     try {
         const bookings = await db.booking.findMany({
+            where: date ? { date } : {},
             include: { user: true },
             orderBy: { createdAt: 'desc' }
         });
@@ -16,7 +20,7 @@ export async function GET() {
 export async function POST(request: Request) {
     try {
         const body = await request.json();
-        const { name, surname, dni, email, className, price, time, days } = body;
+        const { name, surname, dni, email, className, price, time, days, date } = body;
 
         // Upsert user based on DNI
         const user = await db.user.upsert({
@@ -25,13 +29,14 @@ export async function POST(request: Request) {
             create: { name, surname, dni, email },
         });
 
-        // Create booking (for the weekly schedule)
+        // Create booking (for the daily/weekly schedule)
         const newBooking = await db.booking.create({
             data: {
                 className,
                 price: price || '$0',
                 time,
                 days: Array.isArray(days) ? days.join(', ') : (days as string),
+                date: date || new Date().toISOString().split('T')[0],
                 userId: user.id
             }
         });
@@ -43,6 +48,7 @@ export async function POST(request: Request) {
                 price: price || '$0',
                 time,
                 days: Array.isArray(days) ? days.join(', ') : (days as string),
+                date: date || new Date().toISOString().split('T')[0],
                 userId: user.id
             }
         });
