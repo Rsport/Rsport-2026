@@ -90,27 +90,27 @@ export default function InfoPage() {
                         <tbody>
                             <tr>
                                 <td className={styles.timeCell}>18:00hs</td>
-                                <td>Funcional<br />Ritmos Latinos</td>
-                                <td>Funcional<br />Taekwondo</td>
-                                <td>Funcional<br />Ritmos Latinos</td>
-                                <td>Funcional<br />Taekwondo</td>
-                                <td>Funcional</td>
+                                <td><span className={styles.tagFuncional}>Funcional</span><br /><span className={styles.tagRitmos}>Ritmos Latinos</span></td>
+                                <td><span className={styles.tagFuncional}>Funcional</span><br /><span className={styles.tagTaekwondo}>Taekwondo</span></td>
+                                <td><span className={styles.tagFuncional}>Funcional</span><br /><span className={styles.tagRitmos}>Ritmos Latinos</span></td>
+                                <td><span className={styles.tagFuncional}>Funcional</span><br /><span className={styles.tagTaekwondo}>Taekwondo</span></td>
+                                <td><span className={styles.tagFuncional}>Funcional</span></td>
                             </tr>
                             <tr>
                                 <td className={styles.timeCell}>19:00hs</td>
-                                <td>Funcional<br />Yoga</td>
-                                <td>Funcional<br />Taekwondo</td>
-                                <td>Funcional<br />Yoga</td>
-                                <td>Funcional<br />Taekwondo</td>
-                                <td>Funcional</td>
+                                <td><span className={styles.tagFuncional}>Funcional</span><br /><span className={styles.tagYoga}>Yoga</span></td>
+                                <td><span className={styles.tagFuncional}>Funcional</span><br /><span className={styles.tagTaekwondo}>Taekwondo</span></td>
+                                <td><span className={styles.tagFuncional}>Funcional</span><br /><span className={styles.tagYoga}>Yoga</span></td>
+                                <td><span className={styles.tagFuncional}>Funcional</span><br /><span className={styles.tagTaekwondo}>Taekwondo</span></td>
+                                <td><span className={styles.tagFuncional}>Funcional</span></td>
                             </tr>
                             <tr>
                                 <td className={styles.timeCell}>20:00hs</td>
-                                <td>Semipersonalizado</td>
-                                <td>Semipersonalizado</td>
-                                <td>Semipersonalizado</td>
-                                <td>Semipersonalizado</td>
-                                <td>Semipersonalizado</td>
+                                <td><span className={styles.tagSemi}>Semipersonalizado</span></td>
+                                <td><span className={styles.tagSemi}>Semipersonalizado</span></td>
+                                <td><span className={styles.tagSemi}>Semipersonalizado</span></td>
+                                <td><span className={styles.tagSemi}>Semipersonalizado</span></td>
+                                <td><span className={styles.tagSemi}>Semipersonalizado</span></td>
                             </tr>
                         </tbody>
                     </table>
