@@ -30,3 +30,14 @@ model Booking {
   user      User     @relation(fields: [userId], references: [id])
   createdAt DateTime @default(now())
 }
+
+model BookingHistory {
+  id        String   @id @default(cuid())
+  className String
+  price     String   
+  time      String
+  days      String
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  createdAt DateTime @default(now())
+}
