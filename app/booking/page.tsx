@@ -63,24 +63,20 @@ function BookingContent() {
         };
 
         // Helper to format date for value (YYYY-MM-DD)
-        const formatValue = (date: Date) => date.toISOString().split('T')[0];
+        const formatValue = (date: Date) => {
+            const d = new Date(date.getTime() - (date.getTimezoneOffset() * 60000));
+            return d.toISOString().split('T')[0];
+        };
 
-        // Today
+        // Today only
         if (slot.days.includes(['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'][now.getDay()])) {
+            const todayVal = formatValue(now);
             options.push({
                 label: `Hoy (${formatDate(now)})`,
-                value: formatValue(now)
+                value: todayVal
             });
-        }
-
-        // Tomorrow
-        const tomorrow = new Date(now);
-        tomorrow.setDate(now.getDate() + 1);
-        if (slot.days.includes(['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'][tomorrow.getDay()])) {
-            options.push({
-                label: `Mañana (${formatDate(tomorrow)})`,
-                value: formatValue(tomorrow)
-            });
+            // Auto-select today
+            if (!selectedDate) setSelectedDate(todayVal);
         }
 
         return options;
