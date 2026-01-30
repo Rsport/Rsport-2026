@@ -40,7 +40,15 @@ export const Header = () => {
                                 alt="Rsport Logo"
                                 width="120"
                                 height="40"
-                                className={styles.logoImage}
+                                className={`${styles.logoImage} ${styles.logoLight}`}
+                                style={{ objectFit: 'contain' }}
+                            />
+                            <img
+                                src="/assets/logo_white.png"
+                                alt="Rsport Logo"
+                                width="120"
+                                height="40"
+                                className={`${styles.logoImage} ${styles.logoDark}`}
                                 style={{ objectFit: 'contain' }}
                             />
                         </div>
