@@ -35,11 +35,11 @@ export const Header = () => {
                 <div className={styles.brand}>
                     <Link href="/" className={styles.logoLink}>
                         <div className={styles.logoWrapper}>
-                            <Image
+                            <img
                                 src="/assets/uploaded_media_2_1769544962417.png"
                                 alt="Rsport Logo"
-                                width={120}
-                                height={40}
+                                width="120"
+                                height="40"
                                 className={styles.logoImage}
                                 style={{ objectFit: 'contain' }}
                             />
