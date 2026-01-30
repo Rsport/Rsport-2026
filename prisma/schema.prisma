@@ -18,6 +18,7 @@ model User {
   email     String   @unique
   createdAt DateTime @default(now())
   bookings  Booking[]
+  histories BookingHistory[]
 }
 
 model Booking {
@@ -25,7 +26,8 @@ model Booking {
   className String
   price     String   
   time      String
-  days      String
+  days      String   // Keeping this for backward compatibility or recurring info
+  date      String   // Format YYYY-MM-DD for specific attendance
   userId    String
   user      User     @relation(fields: [userId], references: [id])
   createdAt DateTime @default(now())
@@ -37,6 +39,7 @@ model BookingHistory {
   price     String   
   time      String
   days      String
+  date      String   // Format YYYY-MM-DD
   userId    String
   user      User     @relation(fields: [userId], references: [id])
   createdAt DateTime @default(now())
