@@ -34,7 +34,7 @@ export const BottomNav = () => {
                 <HomeIcon />
                 <span>Inicio</span>
             </Link>
-            <Link href="#schedule" className={styles.navItem}>
+            <Link href="/profile" className={`${styles.navItem} ${pathname === '/profile' ? styles.active : ''}`}>
                 <CalendarIcon />
                 <span>Agenda</span>
             </Link>
@@ -47,7 +47,7 @@ export const BottomNav = () => {
                 <DumbbellIcon />
                 <span>Admin</span>
             </Link>
-            <Link href="/register" className={styles.navItem}>
+            <Link href="/profile" className={`${styles.navItem} ${pathname === '/profile' ? styles.active : ''}`}>
                 <UserIcon />
                 <span>Perfil</span>
             </Link>
