@@ -17,6 +17,7 @@ import { Button } from '@/components/ui/Button/Button';
 export default function AdminPage() {
     const [bookings, setBookings] = useState<any[]>([]);
     const [isAuthorized, setIsAuthorized] = useState(false);
+    const [selectedDate, setSelectedDate] = useState(new Date().toISOString().split('T')[0]);
     const router = useRouter();
 
     const authorizedEmails = ['renngiann@gmail.com', 'rsport19movetebien@gmail.com'];
@@ -27,23 +28,46 @@ export default function AdminPage() {
             const user = JSON.parse(storedUser);
             if (authorizedEmails.includes(user.email)) {
                 setIsAuthorized(true);
-                // Fetch bookings from API
-                fetch('/api/bookings')
-                    .then(res => res.json())
-                    .then(data => setBookings(data));
+                fetchBookings();
             } else {
                 router.push('/');
             }
         } else {
             router.push('/');
         }
-    }, []);
+    }, [selectedDate]);
+
+    const fetchBookings = async () => {
+        try {
+            const res = await fetch(`/api/bookings?date=${selectedDate}`);
+            if (res.ok) {
+                const data = await res.json();
+                setBookings(data);
+            }
+        } catch (error) {
+            console.error('Error fetching bookings:', error);
+        }
+    };
 
     if (!isAuthorized) return null;
 
     return (
         <main className={styles.container}>
             <h1 className={styles.title}>Panel de Administrador</h1>
+
+            <div className={styles.adminControls}>
+                <div className={styles.dateFilter}>
+                    <label>Ver asistencia para:</label>
+                    <input
+                        type="date"
+                        value={selectedDate}
+                        onChange={(e) => setSelectedDate(e.target.value)}
+                        className={styles.dateInput}
+                    />
+                </div>
+                <Button onClick={fetchBookings} variant="outline" className={styles.refreshBtn}>Actualizar</Button>
+            </div>
+
             <Card className={styles.tableCard}>
                 <div className={styles.tableWrapper}>
                     <table className={styles.table}>
@@ -52,14 +76,14 @@ export default function AdminPage() {
                                 <th>Usuario</th>
                                 <th>Clase</th>
                                 <th>Horario</th>
-                                <th>Días</th>
-                                <th>Fecha Registro</th>
+                                <th>Fecha Clase</th>
+                                <th>Estado</th>
                             </tr>
                         </thead>
                         <tbody>
                             {bookings.length === 0 ? (
                                 <tr>
-                                    <td colSpan={5} className={styles.empty}>No hay reservas aún.</td>
+                                    <td colSpan={5} className={styles.empty}>No hay registros de "Presente" para este día.</td>
                                 </tr>
                             ) : (
                                 bookings.map((booking) => (
@@ -71,15 +95,11 @@ export default function AdminPage() {
                                             </div>
                                         </td>
                                         <td>{booking.className}</td>
-                                        <td>{booking.time}</td>
+                                        <td>{booking.time} hs</td>
+                                        <td>{booking.date || 'Sin fecha'}</td>
                                         <td>
-                                            <div className={styles.daysTagWrapper}>
-                                                {(booking.days ? booking.days.split(', ') : []).map((d: string) => (
-                                                    <span key={d} className={styles.dayTag}>{d.slice(0, 2)}</span>
-                                                ))}
-                                            </div>
+                                            <span className={styles.statusTag}>Presente</span>
                                         </td>
-                                        <td>{new Date(booking.createdAt).toLocaleDateString()}</td>
                                     </tr>
                                 ))
                             )}
