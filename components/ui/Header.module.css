@@ -41,6 +41,10 @@
     color: var(--foreground);
 }
 
+.logoImage {
+    transition: filter 0.3s ease;
+}
+
 .profilePhotoWrapper {
     width: 32px;
     height: 32px;
@@ -61,5 +65,9 @@
 @media (prefers-color-scheme: dark) {
     .header {
         background: #0f172a;
+    }
+
+    .logoImage {
+        filter: brightness(0) invert(1);
     }
 }
