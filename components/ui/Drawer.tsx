@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { useState, useEffect } from 'react';
 import styles from './Drawer.module.css';
 
 interface DrawerProps {
@@ -9,6 +10,19 @@ interface DrawerProps {
 }
 
 export const Drawer = ({ isOpen, onClose }: DrawerProps) => {
+    const [isAdmin, setIsAdmin] = useState(false);
+    const authorizedEmails = ['renngiann@gmail.com', 'rsport19movetebien@gmail.com'];
+
+    useEffect(() => {
+        const storedUser = localStorage.getItem('rsport_user');
+        if (storedUser) {
+            const user = JSON.parse(storedUser);
+            setIsAdmin(authorizedEmails.includes(user.email));
+        } else {
+            setIsAdmin(false);
+        }
+    }, [isOpen]);
+
     return (
         <>
             {/* Backdrop */}
@@ -39,11 +53,13 @@ export const Drawer = ({ isOpen, onClose }: DrawerProps) => {
                             <span className={styles.icon}>ℹ️</span> Información
                         </Link>
                     </li>
-                    <li>
-                        <Link href="/admin" onClick={onClose}>
-                            <span className={styles.icon}>⚙️</span> Admin
-                        </Link>
-                    </li>
+                    {isAdmin && (
+                        <li>
+                            <Link href="/admin" onClick={onClose}>
+                                <span className={styles.icon}>⚙️</span> Admin
+                            </Link>
+                        </li>
+                    )}
                 </ul>
 
                 <div className={styles.footer}>
