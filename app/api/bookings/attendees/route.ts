@@ -5,6 +5,7 @@ export async function GET(request: Request) {
     const { searchParams } = new URL(request.url);
     const className = searchParams.get('className');
     const time = searchParams.get('time');
+    const date = searchParams.get('date') || new Date().toISOString().split('T')[0];
 
     if (!className || !time) {
         return NextResponse.json({ error: 'Class name and time are required' }, { status: 400 });
@@ -14,7 +15,8 @@ export async function GET(request: Request) {
         const bookings = await db.booking.findMany({
             where: {
                 className,
-                time
+                time,
+                date
             },
             include: {
                 user: {
