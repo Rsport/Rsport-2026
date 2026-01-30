@@ -35,7 +35,7 @@ export default function RegisterPage() {
         if (redirectTo) {
             router.push(redirectTo);
         } else {
-            router.push('/');
+            router.push('/profile');
         }
     };
 
