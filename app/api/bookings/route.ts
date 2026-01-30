@@ -25,11 +25,22 @@ export async function POST(request: Request) {
             create: { name, surname, dni, email },
         });
 
-        // Create booking
+        // Create booking (for the weekly schedule)
         const newBooking = await db.booking.create({
             data: {
                 className,
-                price: price || '$0', // Fallback
+                price: price || '$0',
+                time,
+                days: Array.isArray(days) ? days.join(', ') : (days as string),
+                userId: user.id
+            }
+        });
+
+        // Create booking history (persistent)
+        await db.bookingHistory.create({
+            data: {
+                className,
+                price: price || '$0',
                 time,
                 days: Array.isArray(days) ? days.join(', ') : (days as string),
                 userId: user.id
