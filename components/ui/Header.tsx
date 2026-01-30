@@ -33,15 +33,17 @@ export const Header = () => {
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
                 </button>
                 <div className={styles.brand}>
-                    <Link href="/">
-                        <Image
-                            src="/assets/uploaded_media_2_1769544962417.png"
-                            alt="Rsport Logo"
-                            width={120}
-                            height={40}
-                            className={styles.logoImage}
-                            style={{ objectFit: 'contain' }}
-                        />
+                    <Link href="/" className={styles.logoLink}>
+                        <div className={styles.logoWrapper}>
+                            <Image
+                                src="/assets/uploaded_media_2_1769544962417.png"
+                                alt="Rsport Logo"
+                                width={120}
+                                height={40}
+                                className={styles.logoImage}
+                                style={{ objectFit: 'contain' }}
+                            />
+                        </div>
                     </Link>
                 </div>
                 <Link href="/profile" className={styles.profile}>
